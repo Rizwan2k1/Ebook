@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ebooks</title>
+
+   
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css"
+        rel="stylesheet">
+    <style>
+        .heading-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            line-height: 2.2rem;
+            color: #4141c8;
+            padding: 40px;
+        }
+
+        .book {
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+
+        }
+
+        .book:nth-child(3n) {
+            margin-bottom: 40px;
+
+        }
+
+        .book:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+            background-color: #fff;
+        }
+
+        .book img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .heading-para {
+            font-weight: bold;
+            margin-bottom: -1rem;
+        }
+
+        .main {
+            line-height: 2.2rem;
+        }
+
+        .row:not(:last-child) {
+            margin-bottom: 120px;
+        }
+
+        .btn-primary {
+            border-radius: 15px;
+        }
+
+        .img2 {
+            margin-right: auto;
+        }
+
+        .book {
+            padding: 20px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            background-color: #f8f9fa;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .book:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+            background-color: #fff;
+        }
+
+        .book img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="container">
+            <div class="heading-container">
+                <h1 class="mb-0">EBooks</h1>
+                <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+            </div>
+            <br>
+
+            <div class="container d-flex justify-content-center">
+                <div class="card w-100">
+                    <div class="card-body">
+                        <input type="text" id="searchInput" class="form-control mb-3" placeholder="Search...">
+                        <div class="row" id="bookListContainer">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center" id="pagination">
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const books = [
+            {
+                title: "Python Ebook",
+                link: "https://drive.google.com/file/d/17LyYZXf5KbQxhhaG9WghRXlvnOjhwXRr/view?usp=sharing"
+            },
+            {
+                title: "Python Handwritten",
+                link: "https://drive.google.com/file/d/18VSFSFxoAsZJJX2F1UWMDLXA2sAkXp21/view?usp=sharing"
+            },
+            {
+                title: "Data Structures",
+                link: "https://drive.google.com/file/d/1YpSdrZton8cfqWkIteYRmenv9QWREHGK/view?usp=sharing"
+            },
+            {
+                title: "Java Programs",
+                link: "https://drive.google.com/file/d/1-xVWsy7Ekg1qInoWXRSoKOkEvNA61Hul/view?usp=sharing"
+            },
+            {
+                title: "Android Development",
+                link: "https://drive.google.com/file/d/1om95FRn1nXCnwkH6W1JNq-LbVDJA35Kp/view?usp=sharing"
+            },
+            {
+                title: "C++ Handwritten",
+                link: "https://drive.google.com/file/d/1AyGAGznZViaTOObyMkOzOdEw6RibWxyQ/view?usp=sharing"
+            },
+            {
+                title: "DBMS handwritten",
+                link: "https://drive.google.com/file/d/1mXKAhSc463ye5xYlcXPVYkbK-xgqJSqR/view?usp=sharing"
+            },
+            {
+                title: "Python Game",
+                link: "https://drive.google.com/file/d/142Oqpjms367NgjKAKMfe0XaeM9iFXiI8/view?usp=sharing"
+            },
+            {
+                title: "C handwritten notes",
+                link: "https://drive.google.com/file/d/17Zc_XtgcrgE6KaBtqvRGEUSGsSjTQjbg/view?usp=sharing"
+            },
+            {
+                title: "JavaScript For Beginners",
+                link: "https://drive.google.com/file/d/1eqfshYZ74QJRgjOqxnCt4RvPdXZNe6h0/view?usp=sharing"
+            },
+            {
+                title: "Web Design with HTML and CSS",
+                link: "https://drive.google.com/file/d/1Rqm7Pwoa0j0W0iQ-LCQHTuHJblXgbsQT/view?usp=sharing"
+            },
+            {
+                title: "Easy Java Programming for Beginners",
+                link: "https://drive.google.com/file/d/1zUX44k95dGeQNBLBFL0j9sCQeW-cmvJ0/view?usp=sharing"
+            },
+            {
+                title: "Java interview questions",
+                link: "https://drive.google.com/file/d/1SZDYt1NdBaw9e6qjJTZDb_hMSTEsGjyo/view?usp=sharing"
+            },
+            {
+                title: "Data Structures and Algorithms Made Easy",
+                link: "https://drive.google.com/file/d/1xftUJKg31CcdXX90Eg9mG013EZjW4gHd/view?usp=sharing"
+            },
+            {
+                title: "Problem Solving in Data Structures & Algorithms",
+                link: "https://drive.google.com/file/d/1h8MEyYwitp_cdWQG56DyTmK2i487nrOQ/view?usp=sharing"
+            },
+            {
+                title: "Database Management System [DBMS] Tutorial ",
+                link: "https://drive.google.com/file/d/1mXKAhSc463ye5xYlcXPVYkbK-xgqJSqR/view?usp=sharing"
+            },
+            {
+                title: "Android App Development in Android Studio",
+                link: "https://drive.google.com/file/d/1AV8TAlJLUsSgGFVbRIvDoypVpL0H-bHu/view?usp=sharing"
+            },
+            {
+                title: "Learn Java 8 In a Week",
+                link: "https://drive.google.com/file/d/1o3GDbqGtxpy8eSIm26JSBfuvI7upyIms/view?usp=sharing"
+            },
+            {
+                title: "Java: A Beginner’s Guide, Eighth Edition",
+                link: "https://drive.google.com/file/d/1DGkRRxtOa7MV9hdycW-a_BnrnImaOxGq/view?usp=sharing"
+            },
+            {
+                title: "C handwritten notes",
+                link: "https://drive.google.com/file/d/17Zc_XtgcrgE6KaBtqvRGEUSGsSjTQjbg/view?usp=sharing"
+            },
+            {
+                title: "Learn C Programming",
+                link: "https://drive.google.com/file/d/1pHCVfVRr48HBt2Gj4dwwI_Tzh7_E_2Uf/view?usp=sharing"
+            },
+            {
+                title: "Introduction to C++",
+                link: "https://drive.google.com/file/d/1EMuyHFjd7EC-4XjUONyNt5tD2sinbaK-/view?usp=sharing"
+            },
+            {
+                title: "Principles of Data Structures Using C and C++",
+                link: "https://drive.google.com/file/d/1ldYJY31udy5j8S6aJiujAP2uXMV5ZTQk/view?usp=sharing"
+            },
+            {
+                title: "Software Development for Engineerss",
+                link: "https://drive.google.com/file/d/1Oclb4uC1EtvLljVSLm83_aP-nnlrYwMX/view?usp=sharing"
+            },
+            {
+                title: "Object-Oriented Programming C++",
+                link: "https://drive.google.com/file/d/1eB7cAFlpt5uEphvMnsQPDJTbC-sYqb4u/view?usp=sharing"
+            },
+            {
+                title: "Expert C Programming",
+                link: "https://drive.google.com/file/d/162DS11b7oN85W5Dces52bKPm_thho0aI/view?usp=sharing"
+            },
+            {
+                title: "Real-Time C++",
+                link: "https://drive.google.com/file/d/13Iu0nhQd8vWcMmPtauhpRh5aoVRB5eSP/view?usp=sharing"
+            },
+            {
+                title: "Beginning Programming",
+                link: "https://drive.google.com/file/d/11dKDlPSsW-cy4_g2MXNwqjJr-7HJgoHw/view?usp=sharing"
+            },
+            {
+                title: "C++ in One Hour a Day",
+                link: "https://drive.google.com/file/d/1wTNWfW9y_NGVc28Yj2eLSrIrAf8Qccdt/view?usp=sharing"
+            },
+            {
+                title: "C LANGUAGE IN Hindi",
+                link: "https://drive.google.com/file/d/1euCcxk4B2oe89lPw6gnpzXPO1HkDFACu/view?usp=sharing"
+            },
+            {
+                title: "Mastering Machine Learning with Python in Six Steps",
+                link: "https://drive.google.com/file/d/1hx8W1CmVug-YylAuT623BGCf5HyCowJU/view?usp=sharing"
+            },
+            {
+                title: "Basic Engineering Mathematics",
+                link: "https://drive.google.com/file/d/16fIEWJDk2e87SK7JTI9cdj3MnQ4Tu8n9/view?usp=sharing"
+            },
+            {
+                title: "R Programming - Tutorialspoint",
+                link: "https://drive.google.com/file/d/1InzpsggAHMlFM-YPZvzBKZ5hRG1MpqpL/view?usp=sharing"
+            },
+            {
+                title: "Hello World!: Computer Programming for Kids and Other Beginners",
+                link: "https://drive.google.com/file/d/1Mk6bcUtqFQfRnKihLgXvetKVtq7XCgkq/view?usp=sharing"
+            },
+            {
+                title: "Java Programming for the Absolute Beginner",
+                link: "https://drive.google.com/file/d/1wA5SPyzIPNa-xvpZl97_PlZfWcvsiJ16/view?usp=sharing"
+            },
+            {
+                title: "PHP Pandas",
+                link: "https://drive.google.com/file/d/1S4R4o35LyMVLMVp9MFqFZOdIa7sGeo5d/view?usp=sharing"
+            },
+            {
+                title: "Go Web Programming",
+                link: "https://drive.google.com/file/d/13_5TiSHpphsYBjI34N5OKotFTf1w2J2T/view?usp=sharing"
+            },
+            {
+                title: "Learn PHP 7: Object Oriented Modular Programming",
+                link: "https://drive.google.com/file/d/15Vpd97LVMtb7nY7JeW9bTP3x1xdKmnKq/view?usp=sharing"
+            },
+            {
+                title: "JavaScript programming for the absolute beginner",
+                link: "https://drive.google.com/file/d/1uKz-DcNYdGpIh7NRJ1twdBw468zlMOp7/view?usp=sharing"
+            },
+            {
+                title: "Core Python Applications Programming",
+                link: "https://drive.google.com/file/d/11ZOlLPpb6MpRpLo-cLL8o2y15cTPrKA7/view?usp=sharing"
+            },
+            {
+                title: "Python Crash Course",
+                link: "https://drive.google.com/file/d/1OZuQltEUSxrlhvzT0JCAaryLdsQ9MFIz/view?usp=sharing"
+            },
+            {
+                title: "Learn CSS in One Day",
+                link: "https://drive.google.com/file/d/12fesVI838J2GQko1ZtztYSIpuWu8npeX/view?usp=sharing"
+            },
+            {
+                title: "Machine Learning: Step-by-Step",
+                link: "https://drive.google.com/file/d/1RyPE2_RKf45o3oKapY13ReqKTklfMUZY/view?usp=sharing"
+            },
+
+        ];
+
+        const itemsPerPage = 5;
+        let currentPage = 1;
+
+        function displayBooks(page, query = "") {
+            let filteredBooks = books;
+            if (query.trim() !== "") {
+                const regex = new RegExp(query.trim(), "i");
+                filteredBooks = books.filter(book => regex.test(book.title));
+            }
+
+            const startIndex = (page - 1) * itemsPerPage;
+            const endIndex = Math.min(startIndex + itemsPerPage, filteredBooks.length);
+            const paginatedBooks = filteredBooks.slice(startIndex, endIndex);
+
+            const bookListContainer = document.getElementById('bookListContainer');
+            bookListContainer.innerHTML = '';
+
+            paginatedBooks.forEach(book => {
+                const col = document.createElement('div');
+                col.className = 'col-md-4';
+                col.innerHTML = `
+                    <div class="book">
+                        <label></label>
+                        <p class="heading-para">${book.title}</p>
+                        <div class="mb-3"></div>
+                        <a href="${book.link}" download class="btn btn-primary">Download</a>
+                    </div>
+                `;
+                bookListContainer.appendChild(col);
+            });
+        }
+
+        function displayPagination() {
+            const totalPages = Math.ceil(books.length / itemsPerPage);
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+
+            for (let i = 1; i <= totalPages; i++) {
+                const li = document.createElement('li');
+                li.className = 'page-item';
+                li.innerHTML = `<a class="page-link"  onclick="changePage(${i})">${i}</a>`;
+                pagination.appendChild(li);
+            }
+
+            highlightCurrentPage();
+        }
+
+        function changePage(page) {
+            currentPage = page;
+            displayBooks(currentPage, document.getElementById('searchInput').value);
+            highlightCurrentPage();
+        }
+
+        function highlightCurrentPage() {
+            const paginationLinks = document.querySelectorAll('#pagination .page-link');
+            paginationLinks.forEach(link => {
+                if (Number(link.textContent) === currentPage) {
+                    link.parentElement.classList.add('active');
+                } else {
+                    link.parentElement.classList.remove('active');
+                }
+            });
+        }
+
+        displayBooks(currentPage);
+        displayPagination();
+
+        function goBack() {
+            window.history.back();
+        }
+        function logoutHandler() {
+            window.history.back();
+
+            document.getElementById('logoutBtn').removeEventListener('click', logoutHandler);
+        }
+
+
+        document.getElementById('logoutBtn').addEventListener('click', logoutHandler);
+
+
+        document.getElementById('searchInput').addEventListener('input', function () {
+            displayBooks(currentPage, this.value);
+        });
+    </script>
+</body>
+
+</html>
